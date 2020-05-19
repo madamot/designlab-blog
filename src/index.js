@@ -1,13 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
 import './index.css';
-import App from './App';
+import App from './Components/App';
 import * as serviceWorker from './serviceWorker';
 
+const DESIGNLAB_BASE_URL = 'https://wp-arrowvalves.designlab.agency/graphql';
+
+const httpLink = new HttpLink({
+  uri: DESIGNLAB_BASE_URL,
+  headers: {
+
+  },
+});
+
+const cache = new InMemoryCache();
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache,
+});
+
 ReactDOM.render(
-  <React.StrictMode>
+  <ApolloProvider client={client}>
     <App />
-  </React.StrictMode>,
+  </ApolloProvider>,
   document.getElementById('root')
 );
 
