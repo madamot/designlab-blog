@@ -10,27 +10,9 @@ import * as routes from '../../Constants/routes';
 function App() {
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <Navigation />
-        </header>
-        <div className="App-main">
-          <Route exact path={routes.BLOG}
-            component={() => (
-              <div className="App-content_large-header">
-                <Blog />
-              </div>
-            )}
-          />
-          <Route exact path={routes.BLOG_DETAIL}
-            component={() => (
-              <div className="App-content_small-header">
-                <Blog_Detail />
-              </div>
-            )}
-          />
-        </div>
-      </div>
+      <Navigation />
+      <Route exact path={routes.BLOG} component={Blog} />
+      <Route exact path={routes.BLOG_DETAIL} component={Blog_Detail}/>
     </Router>
   );
 }

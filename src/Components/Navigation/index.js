@@ -7,9 +7,6 @@ const Navigation = () =>
       <div className="Navigation-link">
         <Link to={routes.BLOG}>Blog</Link>
       </div>
-      <div className="Navigation-link">
-        <Link to={routes.BLOG_DETAIL}>Blog_Detail</Link>
-      </div>
     </header>
 
 
