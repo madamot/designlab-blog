@@ -20,7 +20,9 @@ query GET_CATEGORIES {
 }
 `;
 
-const Filter = () => {
+const Filter = (props) => {
+
+
   const [categoryNotIn, setCategory ] = useState([]);
 
   const { loading, error, data } = useQuery(GET_CATEGORIES);
@@ -29,10 +31,11 @@ const Filter = () => {
   if (error) return `Error! ${error.message}`;
   // console.log(data);
 
-  const filterHandler = (id) => {
-    setCategory([...categoryNotIn, id]);
-    console.log(categoryNotIn);
-  }
+
+  const tick = "\u2705"
+  const cross = "\u274C"
+
+  // const symbol = (props.filters.includes(node.databaseId) ? "\u2705" : "\u274C")
 
   return (
     <div>
@@ -42,8 +45,8 @@ const Filter = () => {
       <div className="filterContainer">
         <ul>
           {data.categories.edges.map(({ node }) => (
-            <li onClick={() => filterHandler(node.databaseId)} className="filterButton" key={node.id}>
-              {node.name}
+            <li onClick={() => props.handler(node.databaseId)} className="filterButton" key={node.id}>
+              {node.name} {props.filters.includes(node.databaseId) ? cross : tick}
             </li>
           ))}
         </ul>

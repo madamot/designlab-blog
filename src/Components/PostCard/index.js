@@ -4,7 +4,7 @@ import * as routes from '../../Constants/routes';
 
 const PostCard = (props) => {
   const { id, title, excerpt, uri } = props.posts;
-  console.log(props.posts);
+  // console.log(props.posts);
   return (
     <div className="postGrid">
       {props.posts.map(post => (

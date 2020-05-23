@@ -18,7 +18,7 @@ const Blog_Detail = (props) => {
     <div >
       <h1>{data.postBy.title}</h1>
       <h5>{data.postBy.date}</h5>
-      <p>{data.postBy.content}</p>
+      {data.postBy.content}
     </div>
   )
 }

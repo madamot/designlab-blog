@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 // import { Link } from 'react-router-dom';
@@ -45,24 +45,35 @@ query Posts($size: Int, $offset: Int, $filter: [ID], $cursor: String) {
 
 const Blog = () => {
 
-
+  const [filters, addFilters] = useState([1,])
 
   const { loading, error, data, fetchMore } = useQuery(GET_POSTS, {
-    variables: { "size": 9, "filter": [1], "offset": 0 }
+    variables: { "size": 9, "filter": filters, "offset": 0 }
   });
 
   if (loading) return <Loading />;
   if (error) return `Error! ${error.message}`;
 
-  console.log(data);
+  // console.log(data);
   // addPosts(data);
+
+  const filterHandler = (id) => {
+    if (filters.includes(id)) {
+      const newArr = filters.filter(category => id != category);
+      addFilters(newArr);
+    } else {
+      const notIn = [id, ...filters]
+      addFilters(notIn);
+    }
+
+  }
 
 
 
   return (
     <div>
       <div>
-        <Filter />
+        <Filter handler={filterHandler} filters={filters} />
       </div>
       <br />
       <div>
@@ -74,6 +85,7 @@ const Blog = () => {
         <h5 onClick={() => {
           fetchMore({
             variables: {
+              filter: filters,
               cursor: data.posts.pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) => {

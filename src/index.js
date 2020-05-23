@@ -14,7 +14,7 @@ const DESIGNLAB_BASE_URL = 'https://wp-arrowvalves.designlab.agency/graphql';
 const httpLink = new HttpLink({
   uri: DESIGNLAB_BASE_URL,
   headers: {
-    // authorization: `Bearer 5d3795565afb125318a52c3a4a8de92f61245803`
+
   },
 });
 
